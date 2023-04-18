@@ -9,6 +9,10 @@ Recommended use AllPlatforms.
 
 **Windows**
 
+Switch to the directory,you can choose  `AllPlatform` or `Windows`
+
+切换到目录 `AllPlatform` or `Windows` 下
+
 1. gcc
 
     Library file `ws2_32.lib` is required for compilation.
@@ -24,8 +28,35 @@ Recommended use AllPlatforms.
     or
 
     `gcc *.c -l ws2_32 -o login`
+2. cmake
+
+    Create a folder,and switch to it.
+
+    创建一个文件夹，并切换到该目录
+
+    `mkdir build`
+
+    `cd build`
+
+    We can compile with the following command.
+
+    使用如下命令编译
+
+    `cmake ..`
+
+    `make`
+
+    Execute it.
+
+    执行
+
+    `./login.exe`
 
 **Linux**
+
+Switch to the directory,you can choose  `AllPlatform` or `Linux`
+
+切换到目录 `AllPlatform` or `Linux` 下
 
 1. gcc
 
@@ -36,3 +67,27 @@ Recommended use AllPlatforms.
     or
 
     `gcc *.c -o login`
+
+2. cmake
+
+    Create a folder,and switch to it.
+
+    创建一个文件夹，并切换到该目录
+
+    `mkdir build`
+
+    `cd build`
+
+    We can compile with the following command.
+
+    使用如下命令编译
+
+    `cmake ..`
+
+    `make`
+
+    Execute it.
+
+    执行
+
+    `./login`
