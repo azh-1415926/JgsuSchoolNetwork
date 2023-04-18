@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8.0)
+message(STATUS "The platform is ${CMAKE_HOST_SYSTEM_NAME}")
+set(PROJECT_NAME login)
+message(STATUS "The project name is ${PROJECT_NAME}")
+set(SOURCEFILES client.c myhttp.c mysocket.c)
+message(STATUS "The source is ${SOURCEFILES}")
+project(${PROJECT_NAME})
+add_executable(${PROJECT_NAME} ${SOURCEFILES})
