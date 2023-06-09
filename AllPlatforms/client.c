@@ -11,6 +11,7 @@ int main(){
     setSockaddr(&server_addr,AF_INET,SERVER_IP,SERVER_PORT);
     printf("[*] SERVER_IP:%s\n[*] SERVER_PORT:%d\n",SERVER_IP,SERVER_PORT);
     #if _WIN32
+        system("chcp 65001");
         printf("[-] Winsock Initalize.\n");
         initalizeSocket();
     #endif
