@@ -8,7 +8,7 @@ int main(){
     SOCKET_FD s;
     char buf[512];
     struct sockaddr_in server_addr;
-    setSockaddr(&server_addr,AF_INET,SERVER_IP,SERVER_PORT);
+    setSockaddr(&server_addr,sizeof(server_addr),AF_INET,SERVER_IP,SERVER_PORT);
     printf("[*] SERVER_IP:%s\n[*] SERVER_PORT:%d\n",SERVER_IP,SERVER_PORT);
     #if _WIN32
         system("chcp 65001");

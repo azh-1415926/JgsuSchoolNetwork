@@ -1,5 +1,8 @@
 #include "mysocket.h"
-static void myError(const char* err){
+
+/* 显示错误并退出程序 */
+static void myError(const char* err)
+{
     #if _WIN32
         printf("%s\n",err);
     #elif __linux__
@@ -7,8 +10,24 @@ static void myError(const char* err){
     #endif
     exit(1);
 }
-struct sockaddr_in* setSockaddr(struct sockaddr_in* server_addr,int af,const char* server_ip,int server_port){
-    memset(server_addr,0,sizeof(struct sockaddr_in));
+
+#if _WIN32
+
+/* 初始化套接字，Windows 特有 */
+bool initalizeSocket(){
+    WSADATA wsadata;
+    if(WSAStartup(MAKEWORD(2,2),&wsadata)==0)
+        return true;
+    myError("WSAStart error!");
+}
+
+#endif
+
+/* 初始化 server_addr，用指定 af、ip、port 赋值 */
+struct sockaddr_in* setSockaddr(struct sockaddr_in* server_addr, unsigned int size, int af, const char* server_ip, unsigned int server_port)
+{
+    /* 清空 */
+    memset(server_addr,0,size);
     server_addr->sin_family=af;
     server_addr->sin_port=htons(server_port);
     #if _WIN32
@@ -18,7 +37,10 @@ struct sockaddr_in* setSockaddr(struct sockaddr_in* server_addr,int af,const cha
     #endif
     return server_addr;
 }
-SOCKET_FD Socket(int af,int type,int protocol){
+
+/* 创建一个套接字，返回描述符 */
+SOCKET_FD Socket(int af,int type,int protocol)
+{
     SOCKET_FD s=socket(af,type,protocol);
     #if _WIN32
         if(s!=INVALID_SOCKET)
@@ -30,7 +52,10 @@ SOCKET_FD Socket(int af,int type,int protocol){
     #endif
     myError("socket error!");
 }
-bool Connect(SOCKET_FD s,struct sockaddr* server_addr,socklen_t server_len){
+
+/* 连接到服务器 */
+bool Connect(SOCKET_FD s,struct sockaddr* server_addr,socklen_t server_len)
+{
     int status;
     #if __linux__
         int flags;
@@ -39,12 +64,14 @@ bool Connect(SOCKET_FD s,struct sockaddr* server_addr,socklen_t server_len){
     #endif
         status=connect(s,server_addr,server_len);
     #if _WIN32
-        if(status==SOCKET_ERROR){
+        if(status==SOCKET_ERROR)
+        {
             closeSocket(s);
             myError("connect error!");
         }
     #elif __linux__
-        if(status<0){
+        if(status<0)
+        {
             if(errno!=EINPROGRESS)
             {
                 close(s);
@@ -56,14 +83,21 @@ bool Connect(SOCKET_FD s,struct sockaddr* server_addr,socklen_t server_len){
     #endif
     return true;
 }
-void setTimeout(SOCKET_FD s,int time){
+
+/* 设置 send、receive 超时时长 */
+void setTimeout(SOCKET_FD s,int time)
+{
     struct timeval timeout={time,0};
     setsockopt(s,SOL_SOCKET,SO_SNDTIMEO,(char*)&timeout,sizeof(struct timeval));
+    /* 不知道为什么 Windows 下设置这个会有问题，暂时不用 */
     #if __linux__
         setsockopt(s,SOL_SOCKET,SO_RCVTIMEO,(char*)&timeout,sizeof(struct timeval));
     #endif
 }
-void closeSocket(SOCKET_FD s){
+
+/* 关闭套接字 */
+void closeSocket(SOCKET_FD s)
+{
     #if _WIN32
         closesocket(s);
         WSACleanup();
@@ -71,11 +105,3 @@ void closeSocket(SOCKET_FD s){
         close(s);
     #endif
 }
-#if _WIN32
-bool initalizeSocket(){
-    WSADATA wsadata;
-    if(WSAStartup(MAKEWORD(2,2),&wsadata)==0)
-        return true;
-    myError("WSAStart error!");
-}
-#endif
