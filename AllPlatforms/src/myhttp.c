@@ -13,8 +13,6 @@
 
 #endif
 
-#include "myInfo.h"
-
 /* 初始化报文，根据传入的请求方式、url、http 版本、host 初始化 */
 void httpMessageInitalize(struct http_message* pMessage,int size,const char* method,const char* url,const char* version,const char* host)
 {
@@ -27,13 +25,18 @@ void httpMessageInitalize(struct http_message* pMessage,int size,const char* met
     /* 清空报文 */
     memset(pMessage,0,size);
     /* 插入报文头 */
-    pMessage->method=(char*)method;
-    pMessage->url=(char*)url;
-    pMessage->version=(char*)version;
+    pMessage->method=(char*)malloc(sizeof(char)*(strlen(method)+1));
+    pMessage->url=(char*)malloc(sizeof(char)*(strlen(url)+1));
+    pMessage->version=(char*)malloc(sizeof(char)*(strlen(version)+1));
+    strcpy(pMessage->method,method);
+    strcpy(pMessage->url,url);
+    strcpy(pMessage->version,version);
     /* 插入 Host 字段 */
     pMessage->pField=(struct field_name*)malloc(sizeof(struct field_name));
-    pMessage->pField->key="Host";
-    pMessage->pField->value=(char*)host;
+    pMessage->pField->key=(char*)malloc(sizeof(char)*(strlen("Host")+1));
+    pMessage->pField->value=(char*)malloc(sizeof(char)*(strlen(host)+1));
+    strcpy(pMessage->pField->key,"Host");
+    strcpy(pMessage->pField->value,host);
     pMessage->pField->next=NULL;
 }
 
@@ -49,10 +52,15 @@ void httpMessageFree(struct http_message* pMessage)
     /* pField 指向字段，pTemp 指向需要释放的字段 */
     struct field_name* pField=pMessage->pField;
     struct field_name* pTemp=NULL;
+    free(pMessage->method);
+    free(pMessage->url);
+    free(pMessage->version);
     while(pField->next)
     {
         pTemp=pField;
         pField=pField->next;
+        free(pTemp->key);
+        free(pTemp->value);
         free(pTemp);
     }
     free(pField);
@@ -74,8 +82,10 @@ void httpMessageAddField(struct http_message* pMessage,const char*key,const char
         pField=pField->next;
     /* 在最后一个字段插入新字段 */
     pField->next=(struct field_name*)malloc(sizeof(struct field_name));
-    pMessage->pField->key=(char*)key;
-    pMessage->pField->value=(char*)value;
+    pMessage->pField->key=(char*)malloc(sizeof(char)*(strlen(key)+1));
+    pMessage->pField->value=(char*)malloc(sizeof(char)*(strlen(value)+1));
+    strcpy(pMessage->pField->key,key);
+    strcpy(pMessage->pField->value,value);
     pMessage->pField->next=NULL;
 }
 
@@ -92,7 +102,6 @@ void createHttpMessage(char *buf,struct http_message* pMessage)
     strcat(buf, pMessage->method);
     strcat(buf, " ");
     strcat(buf, pMessage->url);
-    insertUserInfo(buf);
     strcat(buf, " ");
     strcat(buf, pMessage->version);
     strcat(buf, "\n");
