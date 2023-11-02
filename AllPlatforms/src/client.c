@@ -1,6 +1,9 @@
 #include "mysocket.h"
 #include "myhttp.h"
 
+/* 测试，添加 cJSON 库 */
+#include <cJSON.h>
+
 /* 提前定义服务端信息 */
 #define SERVER_IP "192.168.167.42"
 #define SERVER_PORT 801
