@@ -26,7 +26,7 @@ int main()
         initalizeSocket();
     #endif
     /* http 为请求报文 */
-    struct httpMessage http;
+    struct http_message http;
     /* 初始化报文，设置请求方式、url、http 版本 */
     httpMessageInitalize(&http,sizeof(http),"GET",URL,"HTTP/1.1",HOST);
     /* 清空 buf */

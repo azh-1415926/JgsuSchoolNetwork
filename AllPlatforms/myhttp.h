@@ -8,8 +8,8 @@ struct field_name
     char* value;
     struct field_name* next;
 };
-/* httpMessage 为 http 报文 */
-struct httpMessage
+/* http_message 为 http 报文 */
+struct http_message
 {
     char* method;
     char* url;
@@ -18,9 +18,9 @@ struct httpMessage
 };
 
 void getUserInfo(char* buf);
-void httpMessageInitalize(struct httpMessage* pMessage,int size,const char* method,const char* url,const char* version,const char* host);
-void httpMessageFree(struct httpMessage* pMessage);
-void httpMessageAddField(struct httpMessage* pMessage,const char*key,const char*value);
-void createHttpMessage(char *buf,struct httpMessage* pMessage);
+void httpMessageInitalize(struct http_message* pMessage,int size,const char* method,const char* url,const char* version,const char* host);
+void httpMessageFree(struct http_message* pMessage);
+void httpMessageAddField(struct http_message* pMessage,const char*key,const char*value);
+void createHttpMessage(char *buf,struct http_message* pMessage);
 
 #endif

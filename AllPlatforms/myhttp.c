@@ -16,12 +16,12 @@
 #include "myInfo.h"
 
 /* 初始化报文，根据传入的请求方式、url、http 版本、host 初始化 */
-void httpMessageInitalize(struct httpMessage* pMessage,int size,const char* method,const char* url,const char* version,const char* host)
+void httpMessageInitalize(struct http_message* pMessage,int size,const char* method,const char* url,const char* version,const char* host)
 {
     /* 若报文指针为空，直接返回 */
     if(pMessage==NULL)
     {
-        printf("httpMessage is null,intitalize error!\n");
+        printf("http_message is null,intitalize error!\n");
         return;
     }
     /* 清空报文 */
@@ -38,12 +38,12 @@ void httpMessageInitalize(struct httpMessage* pMessage,int size,const char* meth
 }
 
 /* 释放报文 */
-void httpMessageFree(struct httpMessage* pMessage)
+void httpMessageFree(struct http_message* pMessage)
 {
     /* 若报文指针为空，直接返回 */
     if(pMessage==NULL)
     {
-        printf("httpMessage is null,free error!\n");
+        printf("http_message is null,free error!\n");
         return;
     }
     /* pField 指向字段，pTemp 指向需要释放的字段 */
@@ -59,12 +59,12 @@ void httpMessageFree(struct httpMessage* pMessage)
 }
 
 /* 为报文中添加字段，根据传入的 key、value 添加 */
-void httpMessageAddField(struct httpMessage* pMessage,const char*key,const char*value)
+void httpMessageAddField(struct http_message* pMessage,const char*key,const char*value)
 {
     /* 若报文指针为空，直接返回 */
     if(pMessage==NULL)
     {
-        printf("httpMessage is null,addField error!\n");
+        printf("http_message is null,addField error!\n");
         return;
     }
     /* pField 指向字段 */
@@ -80,12 +80,12 @@ void httpMessageAddField(struct httpMessage* pMessage,const char*key,const char*
 }
 
 /* 创建报文 */
-void createHttpMessage(char *buf,struct httpMessage* pMessage)
+void createHttpMessage(char *buf,struct http_message* pMessage)
 {
     /* 若报文指针为空，直接返回 */
     if(pMessage==NULL)
     {
-        printf("httpMessage is null,create error!\n");
+        printf("http_message is null,create error!\n");
         return;
     }
     /* 插入报文头到 buf */
