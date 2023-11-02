@@ -1,11 +1,6 @@
 #ifndef _MY_HTTP_H_
 #define _MY_HTTP_H_
 
-/* 通用头文件 */
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-
 /* field_name 为字段 */
 struct field_name
 {
