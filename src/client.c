@@ -1,9 +1,9 @@
-#include "mysocket.h"
-#include "myhttp.h"
-#include "myInfo.h"
-
+#include <mySocket/socket.h>
+#include <myProtocol/httpMessage.h>
 /* 测试，添加 cJSON 库 */
 #include <cJSON.h>
+
+#include "myInfo.h"
 
 /* 提前定义服务端信息 */
 #define SERVER_IP "192.168.167.42"
@@ -34,7 +34,7 @@ int main()
     /* buf 用于存储请求报文或响应报文，url 为请求的资源，http 为请求报文 */
     char buf[512];
     char url[512];
-    struct http_message http;
+    struct httpMessage message;
     /* 清空 buf，初始化url */
     memset(buf,0,sizeof(buf));
     memset(url,0,sizeof(url));
@@ -42,11 +42,11 @@ int main()
     insertUserInfo(url);
 
     /* 初始化报文，设置请求方式、url、http 版本 */
-    httpMessageInitalize(&http,sizeof(http),"GET",url,"HTTP/1.1",HOST);
+    httpMessageInitalize(&message,sizeof(message),"GET",url,HOST);
     /* 用 buf 接收 http 创建的报文 */
-    createHttpMessage(buf,&http);
+    createHttpMessage(buf,&message);
     /* 释放报文 */
-    httpMessageFree(&http);
+    httpMessageFree(&message);
     /* 显示请求报文 */
     printf("[*] HttpRequestMessage:\n--------------\n%s\n--------------\n",buf);
 
