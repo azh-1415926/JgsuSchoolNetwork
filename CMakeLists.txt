@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 2.8.0)
+project(JgsuCampusNetwork)
+
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
+    message(STATUS "Build the Windows sample")
+    add_subdirectory(sample/Windows)
+elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Linux")
+    message(STATUS "Build the Linux sample")
+    add_subdirectory(sample/Linux)
+endif()

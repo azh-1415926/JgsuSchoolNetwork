@@ -40,7 +40,8 @@ void createHttpRequest(char* buf,int size,const char* method,const char* url,int
     strcat(buf,"&user_password=");
     strcat(buf,passwd);
     strcat(buf," HTTP/1.1\n");
-    for(int i=0;i<argc;i++){
+    for(int i=0;i<argc;i++)
+    {
         strcat(buf,key[i]);
         strcat(buf,":");
         strcat(buf,value[i]);
