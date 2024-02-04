@@ -53,7 +53,7 @@ int main()
         /* 接收响应报文 */
         std::cout<<"[-] Receving from server.\n";
         str=socket.Recv();
-        socket;
+        socket.Close();
         std::cout<<"[*] Recevie success!\n";
         std::cout<<"[-] Clsoe socket.\n";
         /* 打印响应报文 */
