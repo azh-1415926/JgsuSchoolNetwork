@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.0)
+project(login_win)
+
 message(STATUS "The platform is ${CMAKE_HOST_SYSTEM_NAME}")
-set(PROJECT_NAME login)
 message(STATUS "The project name is ${PROJECT_NAME}")
-set(SOURCEFILES client.c myhttp.c mysocket.c)
-message(STATUS "The source is ${SOURCEFILES}")
-set(LIBFILES ws2_32.lib)
-message(STATUS "The lib is ${LIBFILES}")
-project(${PROJECT_NAME})
-add_executable(${PROJECT_NAME} ${SOURCEFILES})
-target_link_libraries(${PROJECT_NAME} ${LIBFILES})
+
+aux_source_directory(./src srcs)
+
+include_directories(include)
+add_executable(${PROJECT_NAME} ${srcs})
+target_link_libraries(${PROJECT_NAME} ws2_32)
