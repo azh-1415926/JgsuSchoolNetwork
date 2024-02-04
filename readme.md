@@ -3,91 +3,41 @@ Applicable to Jinggangshan University campus network login.
 
 适用于井冈山大学校园网登录
 
-Recommended use AllPlatforms.
+Supports Windows/Linux platforms and needs to be built with cmake
 
-推荐使用 AllPlatforms，为最新版本
+支持 Windows/Linux 平台，需使用 cmake 构建
 
-**Windows**
+```bash
+​git clone --recursive https://github.com/azh-1415926/JgsuSchoolNetwork.git
+# or
+​git clone https://github.com/azh-1415926/JgsuSchoolNetwork.git
+cd JgsuSchoolNetwork
+git submodule update --init  --recursive
+```
 
-Switch to the directory,you can choose  `AllPlatform` or `Windows`
+Create a folder,and switch to it.
 
-切换到目录 `AllPlatform` or `Windows` 下
+创建一个文件夹，并切换到该目录
 
-1. gcc
+```bash
+cd JgsuSchoolNetwork
+mkdir build
+cd build
+```
 
-    Library file `ws2_32.lib` is required for compilation.
+We can compile with the following command.
 
-    依赖库文件 `ws2_32.lib`
+使用如下命令编译
 
-    We can compile with the following command.
+```bash
+cmake ..
+make
+```
 
-    编译命令如下
+Execute it.
 
-    `gcc client.c myhttp.c mysocket.c -lws2_32 -o login`
+执行
 
-    or
-
-    `gcc *.c -l ws2_32 -o login`
-2. cmake
-
-    Create a folder,and switch to it.
-
-    创建一个文件夹，并切换到该目录
-
-    `mkdir build`
-
-    `cd build`
-
-    We can compile with the following command.
-
-    使用如下命令编译
-
-    `cmake ..`
-
-    `make`
-
-    Execute it.
-
-    执行
-
-    `./login.exe`
-
-**Linux**
-
-Switch to the directory,you can choose  `AllPlatform` or `Linux`
-
-切换到目录 `AllPlatform` or `Linux` 下
-
-1. gcc
-
-    编译命令如下
-
-    `gcc client.c myhttp.c mysocket.c -o login`
-
-    or
-
-    `gcc *.c -o login`
-
-2. cmake
-
-    Create a folder,and switch to it.
-
-    创建一个文件夹，并切换到该目录
-
-    `mkdir build`
-
-    `cd build`
-
-    We can compile with the following command.
-
-    使用如下命令编译
-
-    `cmake ..`
-
-    `make`
-
-    Execute it.
-
-    执行
-
-    `./login`
+```bash
+./login
+```
