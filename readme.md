@@ -39,5 +39,12 @@ Execute it.
 执行
 
 ```bash
-./login
+./src/login_C
+# or
+./src/login_CXX
+
+# sample for Windows
+./sample/Windows/login
+# sample for Linux
+./sample/Linux/login
 ```
