@@ -57,7 +57,7 @@ int main()
         std::cout<<"[*] Recevie success!\n";
         std::cout<<"[-] Clsoe socket.\n";
         /* 打印响应报文 */
-        std::cout<<"[*] HttpResponseMessage:\n--------------\n%s\n--------------\n"<<str;
+        std::cout<<"[*] HttpResponseMessage:\n--------------\n"<<str<<"\n--------------\n";
     }
     catch(std::string error)
     {

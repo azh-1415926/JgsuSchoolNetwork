@@ -3,6 +3,7 @@
 /* 通用头文件 */
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
 #if __linux__
 
