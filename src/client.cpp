@@ -6,9 +6,9 @@
 #include "myInfo.h"
 
 /* 提前定义服务端信息 */
-#define SERVER_IP "192.168.167.42"
+#define SERVER_IP "192.168.77.18"
 #define SERVER_PORT 801
-#define HOST "192.168.167.42:801"
+#define HOST "192.168.77.18:801"
 #define URL "/eportal/portal/login"
 
 int main()

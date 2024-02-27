@@ -1,9 +1,9 @@
 #include "mysocket.h"
 #include "myhttp.h"
 
-#define SERVER_IP "192.168.167.42"
+#define SERVER_IP "192.168.77.18"
 #define SERVER_PORT 801
-#define HOST "192.168.167.42:801"
+#define HOST "192.168.77.18:801"
 #define URL "/eportal/portal/login"
 
 #define ACCOUNT "?user_account=%2C0%2C"

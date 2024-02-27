@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#define SERVER_IP "192.168.167.42"
+#define SERVER_IP "192.168.77.18"
 #define SERVER_PORT 801
 
 int main()
