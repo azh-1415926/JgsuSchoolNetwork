@@ -13,6 +13,10 @@
 
 int main()
 {
+    #if _WIN32
+        /* 正确显示中文 */
+        system("chcp 65001");
+    #endif
     try
     {
         /* 创建客户端套接字对象 socket */

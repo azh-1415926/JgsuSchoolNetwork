@@ -8,6 +8,11 @@
 
 int main()
 {
+    #if _WIN32
+        /* 正确显示中文 */
+        system("chcp 65001");
+    #endif
+    
     /*
         s 为套接字
         server_addr 为服务端套接字地址信息
@@ -16,8 +21,8 @@ int main()
     */
     SOCKET s;
     struct sockaddr_in server_addr;
-    char request[512];
-    char response[1024];
+    char request[512]={0};
+    char response[1024]={0};
 
     /*
         keys、values 为所有字段的关键字、值的集合
